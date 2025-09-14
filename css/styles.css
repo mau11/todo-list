@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+:root {
+  --dark-purple: rgba(112, 61, 143, 1);
+  --light-purple: rgba(224, 205, 235, 1);
+  --background: rgba(243, 244, 246, 1);
+  --text-color: rgba(51, 51, 51, 1);
+  --main-background: rgba(255, 255, 255, 1);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-purple: 0 0 0 3px rgba(106, 27, 154, 0.2);
+}
+
+body {
+  max-width: 90vw;
+  margin: 36px auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+main {
+  background-color: var(--main-background);
+  min-width: 60vw;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--dark-purple);
+  margin-bottom: 1rem;
+}
+
+form {
+  margin: 2rem 0 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input[type="text"] {
+  border: none;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  flex-grow: 1;
+  padding: 0.8rem 1rem;
+  border: 2px solid #ddd;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--dark-purple);
+  box-shadow: var(--shadow-purple);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--dark-purple);
+  color: var(--main-background);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#clear {
+  display: none;
+  background-color: lightgrey;
+  color: var(--text-color);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.75rem;
+  margin: 0 auto 1rem;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background-color: var(--light-purple);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--dark-purple);
+    cursor: pointer;
+  }
+
+  i {
+    color: rgba(220, 20, 60, 0.75);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin-left: auto;
+  }
+
+  i:hover {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    min-width: 70vw;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  main {
+    min-width: 80vw;
+  }
+
+  form {
+    margin: 1rem 0;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+}
