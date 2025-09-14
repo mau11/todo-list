@@ -1,3 +1,7 @@
+![Screenshot of completed To Do List](./images/screenshot.png)
+
+Deployed on vercel: https://todo-list-teal-gamma.vercel.app/
+
 # ✅ Week05 Bootcamp2019 Project: Todo List
 
 ### Goal: Build a Simple Todo List
@@ -15,6 +19,7 @@
   - Anything specific on which you want feedback!
 
 Example:
+
 ```
 I completed the challenge: 5
 I feel good about my code: 4
