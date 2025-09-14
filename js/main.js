@@ -1,54 +1,64 @@
-document.querySelector("#add").onclick = addTask;
-
 // Set variables
 let id = 0;
+let count = 0;
+const clearBtn = document.querySelector("#clear");
+
+document.querySelector("#add").onclick = addTask;
+document.querySelector("#clear").onclick = clearAll;
+
+clearBtn.onclick = clearAll;
 
 function addTask(e) {
   e.preventDefault();
 
   // Get the input value to create DOM elements
-  const newTask = document.querySelector("input").value;
-  const span = document.createElement("span");
-  span.textContent = newTask;
-  span.id = `text-${id}`;
-  const li = document.createElement("li");
-  li.id = `task-${id}`;
+  const newTask = document.querySelector("input");
+  if (newTask.reportValidity()) {
+    const span = document.createElement("span");
+    span.textContent = newTask.value;
+    span.id = `text-${id}`;
+    const li = document.createElement("li");
+    li.id = `task-${id}`;
 
-  // Add a checkbox for each task
-  const checkbox = document.createElement("input");
-  checkbox.id = `check-${id}`;
-  checkbox.type = "checkbox";
+    // Add a checkbox for each task
+    const checkbox = document.createElement("input");
+    checkbox.id = `check-${id}`;
+    checkbox.type = "checkbox";
 
-  // Add a delete button for each task
-  const deleteIcon = document.createElement("i");
-  deleteIcon.id = `delete-${id}`;
-  deleteIcon.classList = "fa-solid fa-trash fa-sm";
+    // Add a delete button for each task
+    const deleteIcon = document.createElement("i");
+    deleteIcon.id = `delete-${id}`;
+    deleteIcon.classList = "fa-solid fa-trash fa-sm";
 
-  // Add li to DOM
-  li.appendChild(checkbox);
-  li.appendChild(span);
-  li.appendChild(deleteIcon);
+    // Add li to DOM
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(deleteIcon);
 
-  document.querySelector("ul").appendChild(li);
+    document.querySelector("ul").appendChild(li);
 
-  // Add event listener to delete icon
-  document.querySelector(`#delete-${id}`).onclick = (e) => deleteTask(e);
+    // Add event listener to delete icon
+    document.querySelector(`#delete-${id}`).onclick = (e) => deleteTask(e);
 
-  // Add event listener to checkbox
-  document
-    .querySelector(`#check-${id}`)
-    .addEventListener("change", (e) => checkTask(e));
+    // Add event listener to checkbox
+    document
+      .querySelector(`#check-${id}`)
+      .addEventListener("change", (e) => checkTask(e));
 
-  id++;
+    id++;
 
-  // Clear input
-  document.querySelector("form").reset();
+    checkListCount();
+
+    // Clear input
+    document.querySelector("form").reset();
+  }
 }
 
 function deleteTask(e) {
   const taskId = e.target.id.split("-");
   const task = document.querySelector(`#task-${taskId[1]}`);
   task.remove();
+  checkListCount();
 }
 
 function checkTask(e) {
@@ -65,5 +75,18 @@ function checkTask(e) {
     task.style.textDecoration = "unset";
     text.style.fontStyle = "unset";
     text.style.opacity = "1";
+  }
+}
+
+function clearAll() {
+  document.querySelectorAll("li").forEach((li) => li.remove());
+  checkListCount();
+}
+
+function checkListCount() {
+  if (document.querySelectorAll("li").length) {
+    clearBtn.style.display = "block";
+  } else {
+    clearBtn.style.display = "none";
   }
 }
