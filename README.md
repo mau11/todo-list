@@ -1,6 +1,6 @@
 ![Screenshot of completed To Do List](./images/screenshot.png)
 
-Deployed on vercel: https://todo-list-teal-gamma.vercel.app/
+Deployed on vercel: https://todo-list-git-answer-mau11s-projects.vercel.app/
 
 # ✅ Week05 Bootcamp2019 Project: Todo List
 
