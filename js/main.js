@@ -3,9 +3,8 @@ let id = 0;
 let count = 0;
 const clearBtn = document.querySelector("#clear");
 
+// Add event listeners
 document.querySelector("#add").onclick = addTask;
-document.querySelector("#clear").onclick = clearAll;
-
 clearBtn.onclick = clearAll;
 
 function addTask(e) {
@@ -13,6 +12,8 @@ function addTask(e) {
 
   // Get the input value to create DOM elements
   const newTask = document.querySelector("input");
+
+  // Make sure input has text before submitting
   if (newTask.reportValidity()) {
     const span = document.createElement("span");
     span.textContent = newTask.value;
@@ -83,6 +84,7 @@ function clearAll() {
   checkListCount();
 }
 
+// Hide 'clear list' button when list is empty
 function checkListCount() {
   if (document.querySelectorAll("li").length) {
     clearBtn.style.display = "block";
