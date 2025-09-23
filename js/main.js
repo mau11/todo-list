@@ -13,7 +13,11 @@ function addTask(e) {
   // Get the input value to create DOM elements
   const newTask = document.querySelector("input");
 
-  // Make sure input has text before submitting
+  // Make sure input has text before submitting:
+  // As the input has a required attribute and I'm using preventDefault,
+  // I need to use reportValidity to get the blocked default valid check
+  // (ie "Please fill out this field")
+  // Source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/reportValidity
   if (newTask.reportValidity()) {
     const span = document.createElement("span");
     span.textContent = newTask.value;
