@@ -1,0 +1,98 @@
+// Set variables
+let id = 0;
+let count = 0;
+const clearBtn = document.querySelector("#clear");
+
+// Add event listeners
+document.querySelector("#add").onclick = addTask;
+clearBtn.onclick = clearAll;
+
+function addTask(e) {
+  e.preventDefault();
+
+  // Get the input value to create DOM elements
+  const newTask = document.querySelector("input");
+
+  // Make sure input has text before submitting:
+  // As the input has a required attribute and I'm using preventDefault,
+  // I need to use reportValidity to get the blocked default valid check
+  // (ie "Please fill out this field")
+  // Source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/reportValidity
+  if (newTask.reportValidity()) {
+    const span = document.createElement("span");
+    span.textContent = newTask.value;
+    span.id = `text-${id}`;
+    const li = document.createElement("li");
+    li.id = `task-${id}`;
+
+    // Add a checkbox for each task
+    const checkbox = document.createElement("input");
+    checkbox.id = `check-${id}`;
+    checkbox.type = "checkbox";
+
+    // Add a delete button for each task
+    const deleteIcon = document.createElement("i");
+    deleteIcon.id = `delete-${id}`;
+    deleteIcon.classList = "fa-solid fa-trash fa-sm";
+
+    // Add li to DOM
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(deleteIcon);
+
+    document.querySelector("ul").appendChild(li);
+
+    // Add event listener to delete icon
+    document.querySelector(`#delete-${id}`).onclick = (e) => deleteTask(e);
+
+    // Add event listener to checkbox
+    document
+      .querySelector(`#check-${id}`)
+      .addEventListener("change", (e) => checkTask(e));
+
+    id++;
+
+    checkListCount();
+
+    // Clear input
+    document.querySelector("form").reset();
+  }
+}
+
+function deleteTask(e) {
+  const taskId = e.target.id.split("-");
+  const task = document.querySelector(`#task-${taskId[1]}`);
+  task.remove();
+  checkListCount();
+}
+
+function checkTask(e) {
+  const box = e.target;
+  const taskId = e.target.id.split("-");
+  const text = document.querySelector(`#text-${taskId[1]}`);
+
+  // Update styling for completed tasks
+  if (box.checked) {
+    text.style.textDecoration = "line-through";
+    text.style.fontStyle = "italic";
+    text.style.opacity = "0.4";
+  } else {
+    task.style.textDecoration = "unset";
+    text.style.fontStyle = "unset";
+    text.style.opacity = "1";
+  }
+}
+
+function clearAll() {
+  document.querySelectorAll("li").forEach((li) => li.remove());
+  checkListCount();
+}
+
+// Hide 'clear list' button when list is empty
+function checkListCount() {
+  if (document.querySelectorAll("li").length) {
+    clearBtn.style.display = "block";
+  } else {
+    clearBtn.style.display = "none";
+  }
+}
